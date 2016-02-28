@@ -24,30 +24,33 @@ public class CrappieServlet extends HttpServlet {
         //
         //TODO: execute correct method per route
 
-        ServletContext servletContext = getServletContext();
-        servletContext.getAttribute("routeMap");
+       /* ServletContext servletContext = getServletContext();
+        Map<String, String> routeMap = (Map) servletContext.getAttribute("routeMap");
+        if (routeMap == null) {
+            throw new ServletException("Route map is missing. Crappie needs this to work... :(");
+        }
 
-        String controllerName = req.getRequestURI();
-        controllerName = controllerName.substring(1) + "Controller";
+        String route = req.getRequestURI();
 
         CrappieController controller = null;
+
         try {
-            controller = (CrappieController) Class.forName(controllerName).newInstance();
+            controller = (CrappieController) Class.forName(routeMap.get(route)).newInstance();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }
+        }*/
 
         /*Method mth = myclass.getDeclaredMethod(methodName, params);
         Object obj = myclass.newInstance();
         String result = (String)mth.invoke(obj, args);*/
-        PrintWriter out = resp.getWriter();
-        out.println(controller.doMethod());
+        /*PrintWriter out = resp.getWriter();
+        out.println(controller.doMethod());*/
 
-        //printAttributes(req, resp);
+        printAttributes(req, resp);
         //super.service(req, resp);
     }
 
