@@ -1,9 +1,9 @@
 package com.russ4stall.crappie;
 
-import com.russ4stall.crappie.controller.Craptroller;
+import com.russ4stall.crappie.action.CrappieAction;
 import com.russ4stall.crappie.result.CrappieResult;
 import com.russ4stall.crappie.route.CrappieRouteMatcher;
-import com.russ4stall.crappie.route.SimpleRouteMatcher;
+import com.russ4stall.crappie.route.NamingConventionRouteMatcher;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -25,26 +25,21 @@ public class CrappieServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
-        Map<String, Craptroller> controllers = (Map<String, Craptroller>) servletContext.getAttribute("crappieControllerManifest");
-        CrappieRouteMatcher routeMatcher = new SimpleRouteMatcher();
-        Method action = routeMatcher.getAction(req.getRequestURI(), controllers);
+        Map<String, CrappieAction> actionManifest = (Map<String, CrappieAction>) servletContext.getAttribute("actionManifest");
+        CrappieRouteMatcher routeMatcher = new NamingConventionRouteMatcher();
+        CrappieAction action = routeMatcher.getAction(req.getRequestURI(), actionManifest);
 
-        CrappieResult result = null;
-
-        try {
-            Object controllerInstance = action.getDeclaringClass().newInstance();
-            result = (CrappieResult) action.invoke(controllerInstance);
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
+        if(action == null) {
+            //TODO: return 404
         }
+
+        CrappieResult result = action.executeMethod();
+        result.setRequest(req);
+        result.setResponse(resp);
 
         result.handle();
 
-        printAttributes(req, resp);
+        //printAttributes(req, resp);
     }
 
     private void printAttributes(HttpServletRequest req, HttpServletResponse resp) throws IOException {

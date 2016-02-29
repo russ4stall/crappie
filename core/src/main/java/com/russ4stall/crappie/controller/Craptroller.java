@@ -4,24 +4,23 @@ package com.russ4stall.crappie.controller;
  * @author Russ Forstall
  */
 public class Craptroller {
-    private Class<?> controllerClass;
-    private String route;
+    private Class<? extends CrappieController> controllerClass;
 
-    public Craptroller(Class<?> controllerClass, String route) {
+    public Craptroller(Class<? extends CrappieController> controllerClass) {
         this.controllerClass = controllerClass;
-        this.route = route;
     }
 
-    public Craptroller(Class<?> controllerClass) {
-        this.controllerClass = controllerClass;
-        this.route = controllerClass.getSimpleName().toLowerCase();
+    public String getRoute() {
+        //TODO: if has @Route annotation, get route from arg
+
+        String s = controllerClass.getSimpleName().toLowerCase();
+        if (s.endsWith("controller")) {
+            s = s.substring(0, s.length() - 10);
+        }
+        return s;
     }
 
     public Class<?> getControllerClass() {
         return controllerClass;
-    }
-
-    public String getRoute() {
-        return route;
     }
 }
