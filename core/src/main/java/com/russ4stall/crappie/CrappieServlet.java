@@ -1,5 +1,10 @@
 package com.russ4stall.crappie;
 
+import com.russ4stall.crappie.controller.Craptroller;
+import com.russ4stall.crappie.result.CrappieResult;
+import com.russ4stall.crappie.route.CrappieRouteMatcher;
+import com.russ4stall.crappie.route.SimpleRouteMatcher;
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -18,40 +24,27 @@ import java.util.*;
 public class CrappieServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO: decipher route
-        //TODO: load correct class per route (add option for dependency injection?)
-        //      TODO: make map<(String) route, (String) fully qualified className>
-        //
-        //TODO: execute correct method per route
+        ServletContext servletContext = req.getServletContext();
+        Map<String, Craptroller> controllers = (Map<String, Craptroller>) servletContext.getAttribute("crappieControllerManifest");
+        CrappieRouteMatcher routeMatcher = new SimpleRouteMatcher();
+        Method action = routeMatcher.getAction(req.getRequestURI(), controllers);
 
-       /* ServletContext servletContext = getServletContext();
-        Map<String, String> routeMap = (Map) servletContext.getAttribute("routeMap");
-        if (routeMap == null) {
-            throw new ServletException("Route map is missing. Crappie needs this to work... :(");
-        }
-
-        String route = req.getRequestURI();
-
-        CrappieController controller = null;
+        CrappieResult result = null;
 
         try {
-            controller = (CrappieController) Class.forName(routeMap.get(route)).newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Object controllerInstance = action.getDeclaringClass().newInstance();
+            result = (CrappieResult) action.invoke(controllerInstance);
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
             e.printStackTrace();
-        }*/
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
-        /*Method mth = myclass.getDeclaredMethod(methodName, params);
-        Object obj = myclass.newInstance();
-        String result = (String)mth.invoke(obj, args);*/
-        /*PrintWriter out = resp.getWriter();
-        out.println(controller.doMethod());*/
+        result.handle();
 
         printAttributes(req, resp);
-        //super.service(req, resp);
     }
 
     private void printAttributes(HttpServletRequest req, HttpServletResponse resp) throws IOException {

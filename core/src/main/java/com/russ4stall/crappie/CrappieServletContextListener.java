@@ -1,30 +1,38 @@
 package com.russ4stall.crappie;
 
 import com.russ4stall.crappie.controller.CrappieControllerLocator;
+import com.russ4stall.crappie.controller.Craptroller;
 import com.russ4stall.crappie.controller.NamingConventionControllerLocator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * @author Russ Forstall
  *
- * User must extend this class to have crappie work correctly.
+ * User must extend this class in their base package
  */
 public abstract class CrappieServletContextListener implements ServletContextListener {
     final public void contextInitialized(ServletContextEvent servletContextEvent) {
+        Logger logger = LoggerFactory.getLogger(this.getClass());
+
+        //user given init instructions
         crappieInit(servletContextEvent.getServletContext());
 
         CrappieControllerLocator locator = new NamingConventionControllerLocator();
-        Set<Class<?>> controllers = locator.findControllers(this.getClass());
+        Map<String, Craptroller> controllers = locator.findControllers(this.getClass());
 
-        for (Class<?> clazz : controllers){
-            System.out.println(clazz.getCanonicalName());
-        }
+        logger.info("Crappie found " + controllers.size() + " controller(s) using the "
+                + locator.getClass().getSimpleName());
 
-        System.out.println("test");
+        servletContextEvent.getServletContext().setAttribute("crappieControllerManifest", controllers);
+
+
     }
 
     public void crappieInit(ServletContext context) { crappieInit(); }
