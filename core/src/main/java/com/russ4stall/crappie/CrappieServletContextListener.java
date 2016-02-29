@@ -1,6 +1,7 @@
 package com.russ4stall.crappie;
 
-import org.reflections.Reflections;
+import com.russ4stall.crappie.controller.CrappieControllerLocator;
+import com.russ4stall.crappie.controller.NamingConventionControllerLocator;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -16,16 +17,14 @@ public abstract class CrappieServletContextListener implements ServletContextLis
     final public void contextInitialized(ServletContextEvent servletContextEvent) {
         crappieInit(servletContextEvent.getServletContext());
 
-        //TODO: make map of routes to class.method and place in ServletContext
+        CrappieControllerLocator locator = new NamingConventionControllerLocator();
+        Set<Class<?>> controllers = locator.findControllers(this.getClass());
 
-        //TODO search package for controllers
-        Reflections reflections = new Reflections(this.getClass().getPackage());
-        Set<Class<?>> annotatedControllers = reflections.getTypesAnnotatedWith(Controller.class);
-
-        for (Class c : annotatedControllers) {
-            System.out.println(c.getCanonicalName());
+        for (Class<?> clazz : controllers){
+            System.out.println(clazz.getCanonicalName());
         }
 
+        System.out.println("test");
     }
 
     public void crappieInit(ServletContext context) { crappieInit(); }

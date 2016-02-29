@@ -1,4 +1,4 @@
-package com.russ4stall.webapp.home;
+package com.russ4stall.webapp.user;
 
 import com.russ4stall.crappie.annotations.Controller;
 
@@ -6,5 +6,5 @@ import com.russ4stall.crappie.annotations.Controller;
  * @author Russ Forstall
  */
 @Controller
-public class Home {
+public class Register {
 }
