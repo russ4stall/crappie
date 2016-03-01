@@ -13,12 +13,15 @@ public abstract class CrappieController {
     public CrappieController() {
     }
 
-    public CrappieController(HttpServletRequest request, HttpServletResponse response) {
-        this.request = request;
-        this.response = response;
-    }
-
     public String doMethod() {
         return request.getParameter("name");
+    }
+
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+
+    public void setResponse(HttpServletResponse response) {
+        this.response = response;
     }
 }

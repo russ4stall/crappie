@@ -3,6 +3,8 @@ package com.russ4stall.crappie.action;
 import com.russ4stall.crappie.result.CrappieResult;
 import com.russ4stall.crappie.util.HttpMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -22,11 +24,9 @@ public class CrappieAction {
         try {
             Object controllerInstance = method.getDeclaringClass().newInstance();
             result = (CrappieResult) method.invoke(controllerInstance);
-        } catch (InstantiationException e) {
+        } catch (InstantiationException | InvocationTargetException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
         return result;

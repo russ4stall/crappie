@@ -1,4 +1,5 @@
-<jsp:useBean id="TestModel" scope="request" type="com.russ4stall.webapp.home.TestModel"/>
+<%--<jsp:useBean id="TestModel" scope="request" type="com.russ4stall.webapp.home.TestModel"/>--%>
+<jsp:useBean id="model" scope="request" type="com.russ4stall.webapp.home.TestModel"/>
 <%--
   Created by IntelliJ IDEA.
   User: russellf
@@ -13,6 +14,7 @@
 </head>
 <body>
 <h1>TEST JSP</h1>
-<p>${TestModel.name}</p>
+<%--<p>${TestModel.name}</p>--%>
+<p>${model.name}</p>
 </body>
 </html>

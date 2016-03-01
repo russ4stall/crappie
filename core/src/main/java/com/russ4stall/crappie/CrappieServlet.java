@@ -1,6 +1,7 @@
 package com.russ4stall.crappie;
 
 import com.russ4stall.crappie.action.CrappieAction;
+import com.russ4stall.crappie.controller.CrappieController;
 import com.russ4stall.crappie.result.CrappieResult;
 import com.russ4stall.crappie.route.CrappieRouteMatcher;
 import com.russ4stall.crappie.route.NamingConventionRouteMatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -34,7 +36,28 @@ public class CrappieServlet extends HttpServlet {
             //TODO: return 404
         }
 
-        CrappieResult result = action.executeMethod();
+        //TODO create instance of controller (dependencies?)
+        Class <? extends CrappieController> controllerClass = (Class) action.getMethod().getDeclaringClass();
+        CrappieController controllerInstance = null;
+        try {
+            controllerInstance =  controllerClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        controllerInstance.setRequest(req);
+        controllerInstance.setResponse(resp);
+
+
+        CrappieResult result = null;
+        try {
+            result = (CrappieResult) action.getMethod().invoke(controllerInstance);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //TODO execute action
+
         result.setRequest(req);
         result.setResponse(resp);
 

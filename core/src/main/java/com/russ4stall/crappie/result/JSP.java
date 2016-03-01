@@ -25,7 +25,8 @@ public class JSP extends CrappieResult {
 
         if (model != null) {
             //TODO map model fields to attributes
-            request.setAttribute(model.getClass().getSimpleName(), model);
+            request.setAttribute("model", model);
+            //request.setAttribute(model.getClass().getSimpleName(), model);
         }
 
         try {
