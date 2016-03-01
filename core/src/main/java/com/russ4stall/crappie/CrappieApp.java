@@ -4,9 +4,8 @@ import com.russ4stall.crappie.action.CrappieAction;
 import com.russ4stall.crappie.controller.CrappieControllerLocator;
 import com.russ4stall.crappie.controller.CrappieControllerLocatorImpl;
 import com.russ4stall.crappie.controller.Craptroller;
-import com.russ4stall.crappie.route.NamingConventionRouteBuilder;
 import com.russ4stall.crappie.route.CrappieRouteBuilder;
-import com.russ4stall.crappie.util.StaticResourcesFilter;
+import com.russ4stall.crappie.route.NamingConventionRouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +31,6 @@ public abstract class CrappieApp implements ServletContextListener {
         //user given init instructions
         crappieInit(servletContext);
 
-        servletContext.addFilter("default", StaticResourcesFilter.class).addMappingForUrlPatterns(null, true, staticResourcesPath + "/*");
 
         CrappieControllerLocator locator = new CrappieControllerLocatorImpl();
         Set<Craptroller> controllers = locator.findControllers(this.getClass());

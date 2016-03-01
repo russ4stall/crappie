@@ -37,6 +37,8 @@ public class CrappieServlet extends HttpServlet {
 
         if(action == null) {
             //TODO: return 404
+            servletContext.getNamedDispatcher("default").forward(req, resp);
+            return;
         }
 
         //TODO create instance of controller (dependencies?)
