@@ -20,12 +20,19 @@ import java.util.Set;
  *
  * User must extend this class in their base package
  */
-public abstract class CrappieServletContextListener implements ServletContextListener {
+public abstract class CrappieApp implements ServletContextListener {
     final public void contextInitialized(ServletContextEvent servletContextEvent) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
+        ServletContext servletContext = servletContextEvent.getServletContext();
 
+        //Generic app set up
+        System.out.println(servletContext.getEffectiveMajorVersion());
+
+        servletContext.declareRoles();
+
+        //User app set up
         //user given init instructions
-        crappieInit(servletContextEvent.getServletContext());
+        crappieInit(servletContext);
 
         CrappieControllerLocator locator = new CrappieControllerLocatorImpl();
         Set<Craptroller> controllers = locator.findControllers(this.getClass());

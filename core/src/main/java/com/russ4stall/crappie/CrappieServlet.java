@@ -20,7 +20,8 @@ import java.util.*;
 /**
  * @author Russ Forstall
  */
-@WebServlet("/*")
+
+@WebServlet("/")
 public class CrappieServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
