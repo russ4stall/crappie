@@ -29,9 +29,11 @@ public class CrappieServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ServletContext servletContext = req.getServletContext();
+        String uri = req.getRequestURI();
+
         Map<String, CrappieAction> actionManifest = (Map<String, CrappieAction>) servletContext.getAttribute("actionManifest");
         CrappieRouteMatcher routeMatcher = new NamingConventionRouteMatcher();
-        CrappieAction action = routeMatcher.getAction(req.getRequestURI(), actionManifest);
+        CrappieAction action = routeMatcher.getAction(uri, actionManifest);
 
         if(action == null) {
             //TODO: return 404
@@ -54,16 +56,11 @@ public class CrappieServlet extends HttpServlet {
         CrappieResult result = null;
         Parameter[] parameters = action.getMethod().getParameters();
 
-
-
-
         try {
             result = (CrappieResult) action.getMethod().invoke(controllerInstance);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
 
         result.setRequest(req);
         result.setResponse(resp);

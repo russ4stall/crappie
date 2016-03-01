@@ -13,5 +13,6 @@ public class MyApp extends CrappieApp {
     @Override
     public void crappieInit(ServletContext context) {
         //Startup tasks go here...
+        setStaticResourcesPath("/static");
     }
 }
