@@ -17,6 +17,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.*;
 
 /**
@@ -49,14 +50,20 @@ public class CrappieServlet extends HttpServlet {
         controllerInstance.setResponse(resp);
 
 
+        //TODO execute action
         CrappieResult result = null;
+        Parameter[] parameters = action.getMethod().getParameters();
+
+
+
+
         try {
             result = (CrappieResult) action.getMethod().invoke(controllerInstance);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        //TODO execute action
+
 
         result.setRequest(req);
         result.setResponse(resp);

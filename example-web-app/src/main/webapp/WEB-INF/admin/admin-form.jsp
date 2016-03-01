@@ -9,11 +9,12 @@
 <html>
 <head>
     <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <h1>Admin Form</h1>
 
-<form action="/admin/submitForm">
+<form action="/admin/submitForm" method="POST">
     <table>
         <tr>
             <td>Name</td>
