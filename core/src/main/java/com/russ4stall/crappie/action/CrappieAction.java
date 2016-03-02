@@ -35,17 +35,6 @@ public class CrappieAction {
         return method;
     }
 
-    public String getRoute() {
-        //TODO: if has @Route annotation, get route from arg
-        String s = method.getName();
-        s = String.join("-", StringUtil.splitCamelCase(s));
-        s = s.toLowerCase();
-        if (s.equals("index")) {
-            return "";
-        }
-        return "/" + s;
-    }
-
     public HttpMethod getHttpMethod() {
         return httpMethod;
     }

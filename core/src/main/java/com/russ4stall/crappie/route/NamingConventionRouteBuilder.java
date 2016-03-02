@@ -3,6 +3,7 @@ package com.russ4stall.crappie.route;
 import com.russ4stall.crappie.action.CrappieAction;
 import com.russ4stall.crappie.controller.Craptroller;
 import com.russ4stall.crappie.result.CrappieResult;
+import com.russ4stall.crappie.util.StringUtil;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class NamingConventionRouteBuilder implements CrappieRouteBuilder {
             for (Method m : methods) {
                 if (m.getReturnType() == CrappieResult.class) {
                     CrappieAction action = new CrappieAction(m);
-                    String route = controller.getRoute() + action.getRoute() ;
+                    String route = getControllerRoute(controller) + getActionRoute(action) ;
 
                     actionManifest.put(route, action);
                 }
@@ -32,4 +33,27 @@ public class NamingConventionRouteBuilder implements CrappieRouteBuilder {
 
         return actionManifest;
     }
+
+    private String getControllerRoute(Craptroller craptroller) {
+        //TODO: if has @Route annotation, get route from arg
+        String s = craptroller.getControllerClass().getSimpleName();
+        s = String.join("-", StringUtil.splitCamelCase(s));
+        s = s.toLowerCase();
+        if (s.endsWith("controller")) {
+            s = s.substring(0, s.length() - 11);
+        }
+        return s;
+    }
+
+    private String getActionRoute(CrappieAction action) {
+        //TODO: if has @Route annotation, get route from arg
+        String s = action.getMethod().getName();
+        s = String.join("-", StringUtil.splitCamelCase(s));
+        s = s.toLowerCase();
+        if (s.equals("index")) {
+            return "";
+        }
+        return "/" + s;
+    }
+
 }
