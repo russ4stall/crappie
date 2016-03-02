@@ -14,7 +14,7 @@
 <body>
 <h1>Admin Form</h1>
 
-<form action="/admin/submitForm" method="POST">
+<form action="/admin/submit-form" method="POST">
     <table>
         <tr>
             <td>Name</td>

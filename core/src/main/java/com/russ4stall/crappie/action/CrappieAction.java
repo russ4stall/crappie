@@ -2,6 +2,7 @@ package com.russ4stall.crappie.action;
 
 import com.russ4stall.crappie.result.CrappieResult;
 import com.russ4stall.crappie.util.HttpMethod;
+import com.russ4stall.crappie.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +25,7 @@ public class CrappieAction {
         try {
             Object controllerInstance = method.getDeclaringClass().newInstance();
             result = (CrappieResult) method.invoke(controllerInstance);
-        } catch (InstantiationException | InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
         return result;
@@ -39,6 +38,8 @@ public class CrappieAction {
     public String getRoute() {
         //TODO: if has @Route annotation, get route from arg
         String s = method.getName();
+        s = String.join("-", StringUtil.splitCamelCase(s));
+        s = s.toLowerCase();
         if (s.equals("index")) {
             return "";
         }
