@@ -14,11 +14,9 @@ public class AdminController extends CrappieController {
         return new JSP("/WEB-INF/admin/admin-form.jsp");
     }
 
-    public CrappieResult submitForm() {
-        AdminFormModel model = new AdminFormModel();
+    public CrappieResult submitForm(AdminFormModel model) {
+        //AdminFormModel model = new AdminFormModel();
 
-
-
-        return new JSP("/WEB-INF/display-request-params.jsp");
+        return new JSP("/WEB-INF/display-model-fields.jsp", model);
     }
 }

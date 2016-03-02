@@ -1,6 +1,8 @@
 package com.russ4stall.crappie;
 
 import com.russ4stall.crappie.action.CrappieAction;
+import com.russ4stall.crappie.action.CrappieParameterBinder;
+import com.russ4stall.crappie.action.ViewModelParameterBinder;
 import com.russ4stall.crappie.controller.CrappieController;
 import com.russ4stall.crappie.result.CrappieResult;
 import com.russ4stall.crappie.route.CrappieRouteMatcher;
@@ -14,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
@@ -56,10 +55,19 @@ public class CrappieServlet extends HttpServlet {
 
         //TODO execute action
         CrappieResult result = null;
-        Parameter[] parameters = action.getMethod().getParameters();
+
+        CrappieParameterBinder binder = new ViewModelParameterBinder();
+        List<Object> parameters = null;
+        if (action.getMethod().getParameters().length > 0) {
+            parameters = binder.bindParameters(req.getParameterMap(), action.getMethod().getParameters());
+        }
 
         try {
-            result = (CrappieResult) action.getMethod().invoke(controllerInstance);
+            if (action.getMethod().getParameters().length > 0) {
+                result = (CrappieResult) action.getMethod().invoke(controllerInstance, parameters != null ? parameters.toArray() : new Object[0]);
+            } else {
+                result = (CrappieResult) action.getMethod().invoke(controllerInstance);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

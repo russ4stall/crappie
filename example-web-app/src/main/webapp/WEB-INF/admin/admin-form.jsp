@@ -33,6 +33,10 @@
             <td><input type="text" name="role"/></td>
         </tr>
         <tr>
+            <td>Role</td>
+            <td><input type="text" name="role"/></td>
+        </tr>
+        <tr>
             <td>Some Number</td>
             <td><input type="text" name="someNumber"/></td>
         </tr>

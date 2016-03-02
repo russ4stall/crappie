@@ -8,7 +8,7 @@ import com.russ4stall.webapp.user.User;
 public class AdminFormModel {
     private User user;
     private String username;
-    private String role;
+    private String role[];
     private int someNumber;
 
     public AdminFormModel() {
@@ -30,11 +30,11 @@ public class AdminFormModel {
         this.username = username;
     }
 
-    public String getRole() {
+    public String[] getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(String[] role) {
         this.role = role;
     }
 
