@@ -42,6 +42,11 @@ public class NamingConventionRouteBuilder implements CrappieRouteBuilder {
         if (s.endsWith("controller")) {
             s = s.substring(0, s.length() - 11);
         }
+        
+        if (s.equals("index")) {
+            return "";
+        }
+        
         return s;
     }
 
