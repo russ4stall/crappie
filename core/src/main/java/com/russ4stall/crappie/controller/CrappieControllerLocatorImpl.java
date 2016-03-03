@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 public class CrappieControllerLocatorImpl implements CrappieControllerLocator {
     @Override
     public Set<Craptroller> findControllers(Class clazz) {
-        Package package = clazz.getPackage();
+        Package p = clazz.getPackage();
         Reflections reflections;
         
         // If no package is specified, this will search the entire classpath for controllers
-        if (package != null) {
-            reflections = new Reflections(package.getName(), new SubTypesScanner(false));    
+        if (p != null) {
+            reflections = new Reflections(p.getName(), new SubTypesScanner(false));
         } else {
             reflections = new Reflections();
         }
