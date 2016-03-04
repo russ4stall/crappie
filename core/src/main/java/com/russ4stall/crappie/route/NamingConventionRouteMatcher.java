@@ -21,7 +21,6 @@ public class NamingConventionRouteMatcher implements CrappieRouteMatcher {
             return null;
         }
 
-
         return actionManifest.get(uri);
     }
 }

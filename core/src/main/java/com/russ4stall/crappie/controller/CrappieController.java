@@ -10,8 +10,7 @@ public abstract class CrappieController {
     HttpServletRequest request;
     HttpServletResponse response;
 
-    public CrappieController() {
-    }
+    public CrappieController() { }
 
     public String doMethod() {
         return request.getParameter("name");

@@ -1,7 +1,5 @@
 package com.russ4stall.crappie.controller;
 
-import com.russ4stall.crappie.util.StringUtil;
-
 /**
  * @author Russ Forstall
  */
