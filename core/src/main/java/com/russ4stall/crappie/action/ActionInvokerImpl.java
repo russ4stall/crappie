@@ -2,6 +2,8 @@ package com.russ4stall.crappie.action;
 
 import com.russ4stall.crappie.controller.CrappieController;
 import com.russ4stall.crappie.result.CrappieResult;
+
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
  */
 public class ActionInvokerImpl implements ActionInvoker {
     @Override
-    public CrappieResult getResult(CrappieAction action, CrappieParameterBinder parameterBinder, HttpServletRequest request, HttpServletResponse response) {
+    public CrappieResult getResult(CrappieAction action, CrappieParameterBinder parameterBinder, HttpServletRequest request, HttpServletResponse response, ServletContext servletContext) {
 
         //TODO create instance of controller (dependencies?)
         Class <? extends CrappieController> controllerClass = (Class) action.getMethod().getDeclaringClass();
@@ -20,6 +22,7 @@ public class ActionInvokerImpl implements ActionInvoker {
             controllerInstance =  controllerClass.newInstance();
             controllerInstance.setRequest(request);
             controllerInstance.setResponse(response);
+            controllerInstance.setServletContext(servletContext);
         } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }

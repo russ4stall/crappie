@@ -44,7 +44,7 @@ public class CrappieServlet extends HttpServlet {
             return;
         }
 
-        CrappieResult result = actionInvoker.getResult(action, parameterBinder, req, resp);
+        CrappieResult result = actionInvoker.getResult(action, parameterBinder, req, resp, servletContext);
 
         result.setRequest(req);
         result.setResponse(resp);
