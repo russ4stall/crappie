@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
  * Created by russellf on 2/29/2016.
  */
 public abstract class CrappieController {
-    HttpServletRequest request;
-    HttpServletResponse response;
-    ServletContext servletContext;
+    protected HttpServletRequest request;
+    protected HttpServletResponse response;
+    protected ServletContext servletContext;
 
     public CrappieController() { }
 
