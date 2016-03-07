@@ -2,7 +2,8 @@ package com.russ4stall.webapp.admin;
 
 import com.russ4stall.crappie.controller.CrappieController;
 import com.russ4stall.crappie.result.CrappieResult;
-import com.russ4stall.crappie.result.JSP;
+import com.russ4stall.crappie.result.Json;
+import com.russ4stall.crappie.result.Jsp;
 import com.russ4stall.webapp.user.User;
 
 /**
@@ -12,7 +13,7 @@ public class AdminController extends CrappieController {
 
     public CrappieResult getForm() {
 
-        return new JSP("/WEB-INF/admin/admin-form.jsp");
+        return new Jsp("/WEB-INF/admin/admin-form.jsp");
     }
 
     public CrappieResult submitForm(AdminFormModel model) {
@@ -21,6 +22,7 @@ public class AdminController extends CrappieController {
 
         System.out.println(user);
 
-        return new JSP("/WEB-INF/display-model-fields.jsp", model);
+        //return jsp("/WEB-INF/display-model-fields.jsp", model);
+        return json(model);
     }
 }

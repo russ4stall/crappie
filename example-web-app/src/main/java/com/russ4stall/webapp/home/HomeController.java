@@ -12,7 +12,7 @@ public class HomeController extends CrappieController {
     public CrappieResult index() {
         String s = "";
 
-        getRequest().getAttribute("name");
+        request.getAttribute("name");
 
         return new Raw(s);
     }

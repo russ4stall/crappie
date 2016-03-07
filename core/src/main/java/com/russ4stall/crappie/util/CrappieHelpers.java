@@ -13,7 +13,6 @@ import java.util.Map;
  */
 public class CrappieHelpers {
 
-
     protected static void printAttributes(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         PrintWriter out = resp.getWriter();
         out.println("Method: " + req.getMethod());

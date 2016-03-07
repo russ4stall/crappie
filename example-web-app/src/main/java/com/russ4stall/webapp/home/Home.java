@@ -3,7 +3,7 @@ package com.russ4stall.webapp.home;
 import com.russ4stall.crappie.annotations.Controller;
 import com.russ4stall.crappie.controller.CrappieController;
 import com.russ4stall.crappie.result.CrappieResult;
-import com.russ4stall.crappie.result.JSP;
+import com.russ4stall.crappie.result.Jsp;
 
 /**
  * @author Russ Forstall
@@ -15,6 +15,6 @@ public class Home extends CrappieController {
 
         TestModel model = new TestModel("Rusty", 12);
 
-        return new JSP("/WEB-INF/display-model-fields.jsp", model);
+        return new Jsp("/WEB-INF/display-model-fields.jsp", model);
     }
 }

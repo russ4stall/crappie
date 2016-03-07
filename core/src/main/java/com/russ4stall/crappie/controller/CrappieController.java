@@ -1,5 +1,10 @@
 package com.russ4stall.crappie.controller;
 
+import com.russ4stall.crappie.result.CrappieResult;
+import com.russ4stall.crappie.result.Json;
+import com.russ4stall.crappie.result.Jsp;
+import com.russ4stall.crappie.result.Raw;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,31 +19,27 @@ public abstract class CrappieController {
 
     public CrappieController() { }
 
-    public String doMethod() {
-        return request.getParameter("name");
-    }
-
     public void setRequest(HttpServletRequest request) {
         this.request = request;
-    }
-
-    public HttpServletRequest getRequest() {
-        return request;
     }
 
     public void setResponse(HttpServletResponse response) {
         this.response = response;
     }
 
-    public HttpServletResponse getResponse() {
-        return response;
-    }
-
-    public ServletContext getServletContext() {
-        return servletContext;
-    }
-
     public void setServletContext(ServletContext servletContext) {
         this.servletContext = servletContext;
+    }
+
+    protected CrappieResult jsp(String path, Object model) {
+        return new Jsp(path, model);
+    }
+
+    protected CrappieResult json(Object model) {
+        return new Json(model);
+    }
+
+    protected CrappieResult raw(String s) {
+        return new Raw(s);
     }
 }
