@@ -1,6 +1,6 @@
 # Crappie
 
-noun  crap·pie  \ˈkrä-pē\
+####Pronounced \ˈkrä-pē\
 
 Crappie is a simple MVC web framework built on the Servlet API.
 
