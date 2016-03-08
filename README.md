@@ -42,3 +42,13 @@ Deploy to an application server and navigate to `http://localhost:8080/home`
 
 Now have a hardly deserved beer because you just made a crappie web app!
 
+## IN DETAIL
+Crappie offers interfaces for nearly every aspect of it's operations.
+- **ControllerLocator** : Determines how controller classes are identified.
+- **RouteBuilder** : Specifies how routes are built. (Default implementation is naming convention).
+- **RouteMatcher** : Specifies how requests are matched to action methods. (*This should obviously match the RouteBuilder*)
+- **ParameterBinder** : Specifies how request parameters are passed into the action methods. (Default implementation uses view-models with primitive types)
+- **ActionInvoker** : This is how action methods are executed. (This is where the magic happens and unfortunately is where the API is the least loosely coupled.) 
+- **Result** : This handles the view portion of the framework.
+
+All of the above Classes can be implemented for custom behavior.
