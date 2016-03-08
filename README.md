@@ -49,7 +49,6 @@ Crappie offers interfaces for nearly every aspect of it's operations.
 - **RouteMatcher** : Specifies how requests are matched to action methods. (*This should obviously match the RouteBuilder*)
 - **ParameterBinder** : Specifies how request parameters are passed into the action methods. (Default implementation uses view-models with primitive types)
 - **ActionInvoker** : This is how action methods are executed. (This is where the magic happens and unfortunately is where the API is the least loosely coupled.) 
-- **Result** : This handles the view portion of the framework.
 
 All of the above Classes can be implemented for custom behavior and are set in the init method of the CrappieApp subclass:
 ```
