@@ -1,4 +1,7 @@
 # Crappie
+
+####Pronounced \ˈkrä-pē\
+
 Crappie is a simple MVC web framework built on the Servlet API.
 
 The goal of this project is for me to learn more about Java, Servlets, and web development in general.

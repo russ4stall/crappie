@@ -6,16 +6,16 @@ import java.io.IOException;
 /**
  * Created by russellf on 3/1/2016.
  */
-public class JSP extends CrappieResult {
+public class Jsp extends CrappieResult {
     private String jspPath;
     private Object model;
 
-    public JSP(String jspPath) {
+    public Jsp(String jspPath) {
         this.jspPath = jspPath;
         this.model = null;
     }
 
-    public JSP(String jspPath, Object model) {
+    public Jsp(String jspPath, Object model) {
         this.jspPath = jspPath;
         this.model = model;
     }
