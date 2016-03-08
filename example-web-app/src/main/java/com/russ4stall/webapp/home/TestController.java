@@ -15,4 +15,8 @@ public class TestController extends CrappieController {
 
         return new JSP("/WEB-INF/test.jsp", model);
     }
+
+    public CrappieResult test(TestModel test) {
+        return new JSP("/WEB-INF/display-model-fields.jsp", test);
+    }
 }
