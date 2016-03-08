@@ -2,9 +2,7 @@
 
 ####Pronounced \ˈkrä-pē\
 
-Crappie is a simple MVC web framework built on the Servlet API.
-
-The goal of this project is for me to learn more about Java, Servlets, and web development in general.
+Crappie is a simple MVC web framework built on the Servlet API. It's designed to be completely hackable offering interfaces for almost every area of functionality.
 
 ## QUICK START
 To use crappie framework, create a class that extends CrappieApp and annotate it with `javax.servlet.annotation.WebListener`.
@@ -43,3 +41,4 @@ Deploy to an application server and navigate to `http://localhost:8080/home`
 
 
 Now have a hardly deserved beer because you just made a crappie web app!
+
