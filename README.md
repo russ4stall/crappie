@@ -53,10 +53,10 @@ Crappie offers interfaces for nearly every aspect of it's operations.
 All of the above Classes can be implemented for custom behavior and are set in the init method of the CrappieApp subclass:
 ```
 @Override
-    public void crappieInit(ServletContext context) {
-        setControllerLocator(new CustomControllerLocator());
-        setRouteBuilder(new AnnotationsRouteBuilder());
-        setParameterBinder(new FancyParameterBinder());
-        ...
-    }
+public void crappieInit(ServletContext context) {
+    setControllerLocator(new CustomControllerLocator());
+    setRouteBuilder(new AnnotationsRouteBuilder());
+    setParameterBinder(new FancyParameterBinder());
+    ...
+}
 ```
