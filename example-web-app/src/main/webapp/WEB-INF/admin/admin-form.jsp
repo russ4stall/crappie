@@ -17,6 +17,16 @@
 <form action="/admin/submit-form" method="POST">
     <table>
         <tr>
+            <td>Result type:</td>
+            <td>
+                <select name="resultType">
+                    <option value="JSP">JSP</option>
+                    <option value="JSON">JSON</option>
+                    <option value="VIEW_TEMPLATE">View Template</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td>Name</td>
             <td><input type="text" name="name"/></td>
         </tr>

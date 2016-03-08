@@ -2,6 +2,8 @@ package com.russ4stall.webapp.admin;
 
 import com.russ4stall.webapp.user.User;
 
+import java.util.Arrays;
+
 /**
  * Created by russellf on 3/1/2016.
  */
@@ -12,11 +14,22 @@ public class AdminFormModel {
     private String role[];
     private int someNumber;
 
+    private String resultType;
+
     public AdminFormModel() {
     }
 
     public User getUser() {
         return new User(this.name, this.email);
+    }
+
+    public String getResultType() {
+        return resultType;
+    }
+
+    public void setResultType(String resultType) {
+        //this.resultType = ResultType.valueOf(resultType);
+        this.resultType = resultType;
     }
 
     public String getName() {
@@ -57,5 +70,17 @@ public class AdminFormModel {
 
     public void setSomeNumber(int someNumber) {
         this.someNumber = someNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "AdminFormModel{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", role=" + Arrays.toString(role) +
+                ", someNumber=" + someNumber +
+                ", resultType=" + resultType +
+                '}';
     }
 }

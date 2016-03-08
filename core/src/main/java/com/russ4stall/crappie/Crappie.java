@@ -8,4 +8,5 @@ public class Crappie {
     public static final String ACTION_INVOKER = "actionInvoker";
     public static final String PARAMETER_BINDER = "parameterBinder";
     public static final String ROUTE_MATCHER = "routeMatcher";
+    public static final String TEMPLATE_ENGINE = "templateEngine";
 }

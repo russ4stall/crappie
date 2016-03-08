@@ -4,6 +4,7 @@ import com.russ4stall.crappie.action.*;
 import com.russ4stall.crappie.controller.CrappieControllerLocator;
 import com.russ4stall.crappie.controller.CrappieControllerLocatorImpl;
 import com.russ4stall.crappie.controller.Craptroller;
+import com.russ4stall.crappie.result.TemplateEngine;
 import com.russ4stall.crappie.route.CrappieRouteBuilder;
 import com.russ4stall.crappie.route.CrappieRouteMatcher;
 import com.russ4stall.crappie.route.NamingConventionRouteBuilder;
@@ -30,6 +31,7 @@ public abstract class CrappieApp implements ServletContextListener {
     private CrappieRouteMatcher routeMatcher = new NamingConventionRouteMatcher();
     private CrappieParameterBinder parameterBinder = new ViewModelParameterBinder();
     private ActionInvoker actionInvoker = new ActionInvokerImpl();
+    private TemplateEngine templateEngine = null;
 
     final public void contextInitialized(ServletContextEvent servletContextEvent) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -50,6 +52,7 @@ public abstract class CrappieApp implements ServletContextListener {
         servletContext.setAttribute(ROUTE_MATCHER, routeMatcher);
         servletContext.setAttribute(ACTION_INVOKER, actionInvoker);
         servletContext.setAttribute(ACTION_MANIFEST, actionManifest);
+        servletContext.setAttribute(TEMPLATE_ENGINE, templateEngine);
     }
 
     public void crappieInit(ServletContext context) { crappieInit(); }
@@ -76,5 +79,9 @@ public abstract class CrappieApp implements ServletContextListener {
 
     public void setActionInvoker(ActionInvoker actionInvoker) {
         this.actionInvoker = actionInvoker;
+    }
+
+    public void setTemplateEngine(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
     }
 }
