@@ -35,7 +35,6 @@ public class NamingConventionRouteBuilder implements CrappieRouteBuilder {
     }
 
     private String getControllerRoute(Craptroller craptroller) {
-        //TODO: if has @Route annotation, get route from arg
         String s = craptroller.getControllerClass().getSimpleName();
         s = String.join("-", StringUtil.splitCamelCase(s));
         s = s.toLowerCase();
@@ -51,7 +50,6 @@ public class NamingConventionRouteBuilder implements CrappieRouteBuilder {
     }
 
     private String getActionRoute(CrappieAction action) {
-        //TODO: if has @Route annotation, get route from arg
         String s = action.getMethod().getName();
         s = String.join("-", StringUtil.splitCamelCase(s));
         s = s.toLowerCase();

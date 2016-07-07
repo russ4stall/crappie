@@ -43,7 +43,6 @@ public abstract class CrappieApp implements ServletContextListener {
 
         Set<Craptroller> controllers = controllerLocator.findControllers(this.getClass());
         logger.info("CONTROLLERS: " + controllers.size() + " controller(s) were found using the " + controllerLocator.getClass().getSimpleName());
-
         Map<String, CrappieAction> actionManifest = routeBuilder.buildRoutes(controllers);
         logger.info("ROUTES: " + actionManifest.size() + " route(s) were found using the " + routeBuilder.getClass().getSimpleName());
 
