@@ -1,6 +1,6 @@
 # Crappie
 
-####Pronounced \ˈkrä-pē\
+#### Pronounced \ˈkrä-pē\
 
 Crappie is a simple MVC web framework built on the Servlet API. It's designed to be completely hackable offering interfaces for almost every area of functionality.
 
